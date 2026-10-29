@@ -50,21 +50,9 @@ export default function About() {
             PropSight AI helps homeowners, tenants, landlords and property managers in the UK
             understand property problems before calling a professional — saving time, money, and stress.
           </p>
-          <Button size="lg" className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none" onClick={() => navigate('/analyze')}>
+          <Button size="lg" className="bg-white !text-[#142039] hover:bg-[#F4F7FF] !shadow-none" onClick={() => navigate('/analyze')}>
             Try It Now <ArrowRight size={18} className="ml-2" />
           </Button>
-        </div>
-      </section>
-
-      {/* Prototype notice */}
-      <section className="py-6 bg-[#F5A623]/10 border-b border-[#F5A623]/20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex gap-3 items-start">
-          <AlertTriangle size={18} className="text-[#F5A623] shrink-0 mt-0.5" />
-          <p className="text-sm text-[#142039]">
-            <strong>Hackathon Prototype:</strong> PropSight AI is a demonstration prototype. All AI
-            assessments are simulated, no real inference is performed, and no data is stored or
-            transmitted. This product does not currently offer a real contractor booking service.
-          </p>
         </div>
       </section>
 
@@ -235,7 +223,7 @@ export default function About() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none"
+                  className="bg-white !text-[#142039] hover:bg-[#F4F7FF] !shadow-none"
                   onClick={() => navigate('/analyze')}
                 >
                   Check My Property Issue
