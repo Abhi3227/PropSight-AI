@@ -50,7 +50,7 @@ export default function About() {
             PropSight AI helps homeowners, tenants, landlords and property managers in the UK
             understand property problems before calling a professional — saving time, money, and stress.
           </p>
-          <Button size="lg" className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none" onClick={() => navigate('/analyze')}>
+          <Button size="lg" onClick={() => navigate('/analyze')}>
             Try It Now <ArrowRight size={18} className="ml-2" />
           </Button>
         </div>
@@ -113,7 +113,7 @@ export default function About() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="py-20 bg-[#F4F7FF]">
+      <section id="how-it-works" className="py-20 bg-[#F4F7FF] scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             pill="The Process"
@@ -172,7 +172,7 @@ export default function About() {
       </section>
 
       {/* Safety */}
-      <section id="safety" className="py-20 bg-white">
+      <section id="safety" className="py-20 bg-white scroll-mt-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-[#142039] to-[#1D2A49] rounded-3xl p-10 sm:p-14 text-white relative overflow-hidden">
             <div
@@ -235,15 +235,12 @@ export default function About() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   size="lg"
-                  className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none"
                   onClick={() => navigate('/analyze')}
                 >
                   Check My Property Issue
                 </Button>
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="text-white/80 hover:text-white hover:bg-white/10"
                   onClick={() => navigate('/professional-help')}
                 >
                   Get Professional Help

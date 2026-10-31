@@ -312,7 +312,7 @@ function HowItWorks() {
   ]
 
   return (
-    <section id="how-it-works" className="py-20 bg-white">
+    <section id="how-it-works" className="py-20 bg-white scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           pill="Simple Process"
@@ -435,7 +435,7 @@ function Safety() {
   ]
 
   return (
-    <section id="safety" className="py-20 bg-white">
+    <section id="safety" className="py-20 bg-white scroll-mt-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-br from-[#142039] to-[#1D2A49] rounded-3xl p-10 sm:p-14 text-white relative overflow-hidden">
           {/* Background glow */}
@@ -476,7 +476,6 @@ function Safety() {
             </p>
             <Button
               size="lg"
-              className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none font-bold"
               onClick={() => navigate('/analyze')}
             >
               Check My Property Issue

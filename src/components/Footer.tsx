@@ -1,17 +1,38 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Logo from './Logo'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
 const footerLinks = [
   { label: 'Home', to: '/' },
-  { label: 'How It Works', to: '/about#how-it-works' },
+  { label: 'How It Works', to: '/#how-it-works' },
   { label: 'Analyze Issue', to: '/analyze' },
-  { label: 'Safety', to: '/about#safety' },
+  { label: 'Safety', to: '/#safety' },
   { label: 'About', to: '/about' },
 ]
 
 export default function Footer() {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleFooterClick = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+    if (to.includes('#')) {
+      const [path, hash] = to.split('#')
+      const targetPath = path || '/'
+      if (location.pathname === targetPath) {
+        e.preventDefault()
+        navigate(to)
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    } else if (to === location.pathname && !location.hash) {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <footer className="bg-[#142039] text-white print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -40,6 +61,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.to}
+                    onClick={(e) => handleFooterClick(e, link.to)}
                     className="text-sm text-[#8BA3D4] hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F8DFF] rounded"
                   >
                     {link.label}

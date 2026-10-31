@@ -704,7 +704,7 @@ export default function Results() {
                   <Button
                     size="sm"
                     onClick={() => navigate('/professional-help')}
-                    className="bg-[#3478F6] flex items-center gap-1.5"
+                    className="flex items-center gap-1.5"
                   >
                     <PhoneCall size={14} /> Request Professional Assistance
                   </Button>
@@ -779,8 +779,8 @@ export default function Results() {
               onClick={() => navigate('/professional-help')}
               className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 ${
                 assessment.priority === 'HIGH' || outcome === 'getting_worse' || outcome === 'no_improvement'
-                  ? 'bg-red-600 hover:bg-red-700'
-                  : 'bg-[#3478F6]'
+                  ? '!bg-red-600 hover:!bg-red-700'
+                  : ''
               }`}
             >
               <PhoneCall size={15} /> Get Professional Help
