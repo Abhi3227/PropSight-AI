@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+﻿import { useState, useRef, useCallback, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   Droplets,
@@ -417,7 +417,9 @@ function Step3Description({
   setForm: React.Dispatch<React.SetStateAction<FormState>>
   errors: Record<string, string>
 }) {
-  const charCount = form.description.trim().length
+  const MAX_WORDS = 2000
+  const wordCount =
+    form.description.trim() === '' ? 0 : form.description.trim().split(/\s+/).length
   return (
     <div>
       <label htmlFor="description" className="block text-sm font-semibold text-[#142039] mb-2">
@@ -427,7 +429,11 @@ function Step3Description({
         id="description"
         rows={6}
         value={form.description}
-        onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
+        onChange={(e) => {
+          const val = e.target.value
+          const wc = val.trim() === '' ? 0 : val.trim().split(/\s+/).length
+          if (wc <= MAX_WORDS) setForm((f) => ({ ...f, description: val }))
+        }}
         placeholder="Describe what you noticed, where it appeared, and anything that may have happened before it started."
         className={`w-full border rounded-xl px-4 py-3.5 text-sm text-[#142039] placeholder-[#8BA3D4] resize-none focus:outline-none focus:ring-2 focus:ring-[#3478F6] transition-shadow leading-relaxed ${
           errors.description
@@ -439,14 +445,16 @@ function Step3Description({
         <FieldError msg={errors.description} />
         <span
           className={`text-xs ml-auto font-medium ${
-            charCount === 0
+            wordCount === 0
               ? 'text-[#8BA3D4]'
-              : charCount < 20
+              : wordCount < 10
+              ? 'text-[#F5A623]'
+              : wordCount > MAX_WORDS * 0.9
               ? 'text-[#F5A623]'
               : 'text-[#16C784]'
           }`}
         >
-          {charCount} / 20 min
+          {wordCount} / {MAX_WORDS} words
         </span>
       </div>
     </div>
@@ -942,7 +950,16 @@ export default function Analyze() {
     }
     try {
       const saved = sessionStorage.getItem('propsight_analyze_draft')
-      return saved ? { ...INITIAL_FORM, ...JSON.parse(saved) } : INITIAL_FORM
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        // Image data cannot be serialised back from sessionStorage (sentinel value)
+        if (parsed.imagePreview === '__HAS_IMAGE__') {
+          parsed.imagePreview = null
+          parsed.imageName = null
+        }
+        return { ...INITIAL_FORM, ...parsed }
+      }
+      return INITIAL_FORM
     } catch {
       return INITIAL_FORM
     }
@@ -999,7 +1016,7 @@ export default function Analyze() {
       errs.issueCategory = 'Please select an issue type to continue.'
     }
     if (s === 3 && form.description.trim().length < 20) {
-      errs.description = 'Please describe the issue in at least 20 characters so we can understand what is happening.'
+      errs.description = 'Please describe the issue in at least a few words so we can understand what is happening.'
     }
     if (s === 4) {
       if (!form.location) errs.location = 'Please tell us where in the property the issue is located.'
