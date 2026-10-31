@@ -476,7 +476,6 @@ function Safety() {
             </p>
             <Button
               size="lg"
-              className="bg-white text-[#142039] hover:bg-[#F4F7FF] !shadow-none font-bold"
               onClick={() => navigate('/analyze')}
             >
               Check My Property Issue

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
+import Button from './Button'
 
 const navLinks = [
   { label: 'How It Works', to: '/about#how-it-works' },
@@ -45,12 +46,9 @@ export default function Header() {
 
           {/* CTA button */}
           <div className="hidden md:flex items-center">
-            <button
-              onClick={() => navigate('/analyze')}
-              className="bg-[#3478F6] hover:bg-[#4F8DFF] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6] focus-visible:ring-offset-2 active:scale-95"
-            >
+            <Button size="md" onClick={() => navigate('/analyze')}>
               Analyze My Property
-            </button>
+            </Button>
           </div>
 
           {/* Mobile burger */}
@@ -84,12 +82,13 @@ export default function Header() {
                 {link.label}
               </NavLink>
             ))}
-            <button
+            <Button
+              size="md"
               onClick={() => { navigate('/analyze'); setOpen(false) }}
-              className="mt-3 bg-[#3478F6] hover:bg-[#4F8DFF] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3478F6]"
+              className="mt-3 w-full"
             >
               Analyze My Property
-            </button>
+            </Button>
           </nav>
         </div>
       )}
